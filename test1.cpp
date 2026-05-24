@@ -1,19 +1,23 @@
 #include<iostream>
-#include<vector>
+#include<cmath>
 using namespace std;
+
+int digits(int n,int dig){
+    if (n/10==0){return dig;};
+    return digits(n/10,++dig);
+}
+
+int pall(int n,int digi,int digit){
+    if (digi==0){cout<<"It is a pallindrome\n";return ;};
+    if (n/pow(10,(digi-1))!=(n%(pow(10,(digit-digi+1))))){cout<<"Not a pallindrome";};
+    return pall (n,digi-1,digit);
+}
+
 int main (){
-    int x,n,m,sum{0},a1,a2,b1,b2;
-    cout<<"Enter the number of rows and columns\n";
-    cin>>n>>m;
-    vector<vector<int>> v(n,vector<int>(m));
-    cout<<"Enter the elements\n";
-    for(int i=0;i<n;i++){for(int j=0;j<m;j++){cin>>x;sum+=x;v[i][j]=sum;};sum=0;};
-    cout<<"Enter the posion to find sum for rectangle of:\n";
-    cin>>a1>>b1>>a2>>b2;
-    int &y=sum;
-    for (int i=a1;i<=a2;i++){if(b1==0){y+=v[i][b2];}
-                             else{y+=(v[i][b2]-v[i][b1-1]);};}
-    
-    cout<<"Sum is:"<<y<<endl;
-    return 0;
+    int a;
+    cout<<"Enter the number\n";
+    cin>>a;
+    int x=digits(a,1);
+    pall(a,x,x);
+    return pall(a,x,x);;
 }

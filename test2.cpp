@@ -1,29 +1,23 @@
 #include<iostream>
-#include<vector>
+#include<cmath>
 using namespace std;
-void swap(int &x,int &y){
-    x=x+y;
-    y=x-y;
-    x=x-y;
-}
-int main(){
-    int n;
-    cout<<"Enter the order of matrix\n";
-    cin>>n;
-    vector<vector<int>> v(n,vector<int>(n));
-    cout<<"Enter the numbers\n";    
-    for(int i=0;i<n;i++){for(int j=0;j<n;j++){cin>>v[i][j];};};
-    
-    cout<<"Original matrix:\n";
-    for(int i=0;i<n;i++){for(int j=0;j<n;j++){cout<<v[i][j]<<" ";};cout<<endl;};
- 
-    cout<<"Rotated matrix:\n";
-    for(int i=0;i<(n/2);i++){for(int j=0;j<(n-1-2*i);j++){swap(v[i][j+i],v[n-1-j-i][i]);
-                                                  swap(v[n-1-i-j][i],v[n-1-i][n-1-j-i]);
-                                                  swap(v[n-1-i][n-1-j-i],v[j+i][n-1-i]);
-                                                  }};
 
-    for(int i=0;i<n;i++){for(int j=0;j<n;j++){cout<<v[i][j]<<" ";};cout<<endl;};
-                                             
-    return 0;
+int digits(int n,int dig){
+    if (n/10==0){return dig;};
+    return digits(n/10,++dig);
+}
+
+int pall(int n,int digi,int digit){
+    if (digi==0){cout<<"It is a pallindrome\n";return ;};
+    if (n/pow(10,(digi-1))!=(n%(pow(10,(digit-digi+1))))){cout<<"Not a pallindrome";};
+    return pall (n,digi-1,digit);
+}
+
+int main (){
+    int a;
+    cout<<"Enter the number\n";
+    cin>>a;
+    int x=digits(a,1);
+    pall(a,x,x);
+    return pall(a,x,x);;
 }
