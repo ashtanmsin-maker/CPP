@@ -4,7 +4,7 @@ using namespace std;
 void bubble(int *arr,int i,int n){
     if(i==n-1){return;};
     bool flag{false};
-    for(int j=1;j<n-i;j++){if(!arr[j-1]){
+    for(int j=1;j<n-i;j++){if(arr[j]<arr[j-1]){
         flag=true;
         int temp;
         temp=arr[j];

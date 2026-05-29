@@ -1,18 +1,19 @@
 #include<iostream>
 using namespace std;
 
-void bubble(int *arr,int i,int n){
+void selection(int *arr,int n,int i=0){
     if(i==n-1){return;};
-    bool flag{false};
-    for(int j=1;j<n-i;j++){if(!arr[j-1]){
-        flag=true;
-        int temp;
-        temp=arr[j];
-        arr[j]=arr[j-1];
-        arr[j-1]=temp;};};
+    int min=arr[i],k=i;
+    
+    for(int j=i+1;j<n;j++){if(arr[j]<min){min=arr[j];k=j;};};
+    if(min==arr[i]){;}
+    else{
+        arr[k]=arr[i];
+        arr[i]=min;
+         };
     i++;
-    if(!flag){return ;}
-    else{return bubble(arr,i,n);};    
+    return selection(arr,n,i);   
+
     }
 
 int main (){
@@ -22,7 +23,7 @@ int main (){
     int arr[a];
     cout<<"Enter the elements:\n";
     for(int i=0;i<a;i++){cin>>arr[i];};
-    bubble(arr,0,a);
+    selection(arr,a,0);
     cout<<"Output:\n";
     for(int i=0;i<a;i++){cout<<arr[i]<<" ";};
     cout<<endl;
