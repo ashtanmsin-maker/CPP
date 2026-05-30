@@ -4,14 +4,9 @@
 using namespace std;
 
 void bucket(float *arr,int n){
-    int max=arr[0],min=arr[0];
-    for(int i=1;i<n;i++){
-        if(arr[i]<min){min=arr[i];};
-        if(arr[i]>max){max=arr[i];};
-    };
     vector<vector<float>> v(n,vector<float>());
     for(int i=0;i<n;i++){
-        int index=((arr[i]-min)/(max-min))*(n-1);
+        int index=n*arr[i];
         v[index].push_back(arr[i]);
     };
     int k{0};
