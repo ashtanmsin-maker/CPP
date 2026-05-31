@@ -1,41 +1,31 @@
 #include<iostream>
-#include<vector>
-#include<algorithm>
 using namespace std;
 
-void bucket(float *arr,int n){
-    int max=arr[0],min=arr[0];
-    for(int i=1;i<n;i++){
-        if(arr[i]<min){min=arr[i];};
-        if(arr[i]>max){max=arr[i];};
-    };
-    vector<vector<float>> v(n,vector<float>());
-    for(int i=0;i<n;i++){
-        int index=((arr[i]-min)/(max-min))*(n-1);
-        v[index].push_back(arr[i]);
-    };
-    int k{0};
-    for(int i=0;i<n;i++){
-        if(v[i].size()==0){;}
-        else {if(v[i].size()==1){arr[k++]=v[i][0];}
-              else {sort(v[i].begin(),v[i].end());
-                    for(int j=0;j<v[i].size();j++){arr[k++]=v[i][j];}
-                        ;};};
-    }
+int binary(int* arr,int target,int l,int r){
+    if(l>r){return -1;};
+    int mid=l+(r-l)/2;
+    if(arr[0]==target){return 0;}
+    else {if(arr[1]==target){return 1;};};
+    if(arr[mid]==target){return mid;};
+    if(arr[mid]>=target){return binary(arr,target,l,mid-1);}
+    else {if(arr[mid]<target){return binary(arr,target,mid+1,r);};};
+    
 }
-
 int main(){
-    int a;
-    cout<<"Enter the number of elements:\n";
+    int a,target;
+    cout<<"Enter the number of elements\n";
     cin>>a;
+    int arr[a];
     cout<<"Enter the elements:\n";
-    float arr[a],ans[a];
     for(int i=0;i<a;i++){cin>>arr[i];};
+    cout<<"Enter the target value:\n";
+    cin>>target;
 
-    bucket(arr,a);
-
-    cout<<"Output:\n";
-    for(int i=0;i<a;i++){cout<<arr[i]<<" ";};
+    int x=binary(arr,target,0,a-1);
+    
+    cout<<"Output:\n";;
+    if(x==-1){cout<<"Not present";}
+    else {cout<<"It is present at "<<x<<"th index";};
     cout<<endl;
     return 0;
 }

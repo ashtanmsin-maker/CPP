@@ -1,9 +1,24 @@
 #include<iostream>
-#include<vector>
 using namespace std;
-int main (){
-    vector<vector<int>> v{{1,2},{3,4,5}};
-    cout<<v[0].size();
+
+int binary(int a,int l,int r){
+    int mid=l+(r-l)/2;
+    if(l>r){return r;};
+    if(mid*mid<=a){
+        return binary(a,mid+1,r);
+    }
+    else{
+        return binary(a,l,mid-1);
+    };
+}
+int main(){
+    int a;
+    cout<<"Enter the element\n";
+    cin>>a;
+
+    int x=binary(a,0,a);
+    
+    cout<<"Output:\n"<<x;
     cout<<endl;
     return 0;
 }
