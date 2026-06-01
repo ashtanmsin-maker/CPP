@@ -6,10 +6,8 @@ int binary(int a,int l,int r){
     if(l>r){return r;};
     if(mid*mid<=a){
         return binary(a,mid+1,r);
-    }
-    else{
-        return binary(a,l,mid-1);
     };
+return binary(a,l,mid-1);
 }
 int main(){
     int a;

@@ -8,7 +8,7 @@ int binary(int* arr,int target,int l,int r){
                             if(y==-1){return mid;}
                             else{return y;};};
     if(arr[mid]<target){return binary(arr,target,mid+1,r);}
-    else {if(arr[mid]>target){return binary(arr,target,l,mid-1);};};
+    return binary(arr,target,l,mid-1);
     
 }
 int main(){

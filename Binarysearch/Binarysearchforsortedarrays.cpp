@@ -5,10 +5,10 @@ int binary(int* arr,int target,int l,int r){
     if(l>r){return -1;};
     int mid=l+(r-l)/2;
     if(arr[mid]==target){return mid;};
-    if(arr[mid]<target){return binary(arr,target,mid+1,r);}
-    else {if(arr[mid]>target){return binary(arr,target,l,mid-1);};};
-    
+    if(arr[mid]<target){return binary(arr,target,mid+1,r);};
+    return binary(arr,target,l,mid-1);
 }
+
 int main(){
     int a,target;
     cout<<"Enter the number of elements\n";
