@@ -1,0 +1,53 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+void conquer(int *arr,int l,int mid,int r){
+    int an=mid-l+1;
+    int bn=r-mid;
+    int a[an];
+    int b[bn];
+    for(int i=0;i<an;i++){a[i]=arr[l+i];};
+    for(int j=0;j<bn;j++){b[j]=arr[mid+1+j];};
+
+    int i{0},j{0},k{l};
+    for(;(i<an)&&(j<bn);){
+        if(a[i]<b[j]){arr[k++]=a[i++];}
+        else{arr[k++]=b[j++];};};
+
+        while (i<an){arr[k++]=a[i++];};
+        while (j<bn){arr[k++]=b[j++];};
+        
+}
+
+void divide(int *arr,int l,int r){
+    if(r-l==0){return ;};
+    
+    int mid = (l+r)/2;
+    divide(arr,l,mid);
+    divide(arr,mid+1,r);
+    conquer(arr,l,mid,r);
+}
+
+void toascii(string* str,int n){
+    int arr[n];
+    for(int i=0;i<n;i++){
+        arr[i]=(int)(*str)[i];
+    };
+    divide(arr,0,n-1);
+    for(int i=0;i<n;i++){
+        (*str)[i]=(char)arr[i];
+    };
+}
+
+int main(){
+    string str1,str2;
+    cout<<"Enter the first word:\n";
+    cin>>str1;
+    cout<<"Enter the second word:\n";
+    cin>>str2;
+    toascii(&str1,size(str1));
+    toascii(&str2,size(str2));
+    str1==str2?cout<<"true"<<endl:cout<<"false"<<endl;
+    return 0;
+}

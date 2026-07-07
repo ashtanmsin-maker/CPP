@@ -1,25 +1,41 @@
 #include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
 using namespace std;
 
-int binary(int* arr,int target,int l,int r){
-    int mid=l+(r-l)/2;
-    if(l<r){return arr[mid];};
-    if(arr[mid]<=target){return binary(arr,target,mid+1,r);};
-    return binary(arr,target,l,mid-1);
-}
-int main(){
-    int a,target;
-    cout<<"Enter the element\n";
-    cin>>a;
-    int arr[a];
-    cout<<"Enter the elements:\n";
-    for(int i=0;i<a;i++){cin>>arr[i];};
-    cout<<"Enter the target value:\n";
-    cin>>target;
+void decoder(string &str1,string &str2,string &str3,int n){
+    for(int i=n;i>=0;i--){
+        if(str1[i]==']'){continue;}
+        else {if(str1[i]=='['){
+            reverse(str2.begin(),str2.end());
+            string str4="";
+            for(int j=i-1;((j>=0)&&(((int)str1[j]>=48)&&((int)str1[j]<=57)));j--){
+                str4.push_back(str1[j]);
+                i=--j;
+            };
+            reverse(str4.begin(),str4.end());
+            int a=stoi(str4);
+            string str5=str2;
+            for(int k=1;k<a;k++){
+                str2=str2+str5;
+            };
+            str3=str2+str3;
+            str2="";
+                    }
+                    else {str2=str2+str1[i];};};
 
-    int x=binary(arr,target,0,a-1);
+    };
+    return;
+}
+
+int main(){
+    string str1,str2="",str3="";
+    cout<<"Enter the code\n";
+    cin>>str1;
+    decoder(str1,str2,str3,size(str1)-1);
+    cout<<"Decoded string is:\n"<<str3<<endl;
+
     
-    cout<<"Output:\n"<<x;
-    cout<<endl;
     return 0;
 }
